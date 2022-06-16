@@ -1,6 +1,3 @@
-/* Author: DC-Nam */
-/* Có lỗi liên hệ me: fb.me/levy.nam.2k5 */
-
 module.exports.config = {
   name: "topbox",
   version: "1.1.1",
@@ -32,7 +29,7 @@ module.exports.run = async ({
   if (!allType.includes(g[0]) || !g[0]) return a.sendMessage(`» Vui lòng chọn money|level muốn xem`, t, m)
   if (g[1] && isNaN(g[1])) return a.sendMessage(`» Phải là 1 con số`, t, m)
   switch (g[0]) {
-    case "boxmoney": {
+    case "money": {
       await FOD("money", "m")
       array.sort(VC("m"))
       FO("m")
@@ -56,7 +53,7 @@ module.exports.run = async ({
   /* Tổng hợp top*/
   function FF(t1, t2) {
     for (var i in newArr) {
-      msg += `${i < 4 ? ICON(i) : parseInt(i) + "."} ${newArr[i].n}\n » ${t1}: ${LV(newArr[i][t2])}\n`
+      msg += `${i < 4 ? ICON(i) : parseInt(i) + "."} ${newArr[i].n}\n » ${t1}: ${t2 == "m" ? CC(newArr[i][t2]) : LV(newArr[i][t2])}\n`
       if ((i == parseInt(g[1]) - 1 && i < newArr.length) || i == 9) break
     }
   }
