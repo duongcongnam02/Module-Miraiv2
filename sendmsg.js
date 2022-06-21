@@ -14,23 +14,23 @@ module.exports.run = async function ({ api, event, args }) {
   const { name, credits } = this.config
   const id = parseInt(args[0])
   const content = args.splice(1).join(" ")
-  if (id == t) return
   var msg = `Tin nhắn từ admin: ${content}`
  api.sendMessage(msg, id, async(error, info) => {
  global.client.handleReply.push({
-  name, messageID: info.messageID, author: s, t
+  name, messageID: info.messageID, author: s, id: t
     })
   })
 }
 module.exports.handleReply = async function ({ api, event, handleReply: h }) {
   const { threadID: t, messageID: m, senderID: s, body: y } = event
   const { name, credits } = this.config
-  var msg = s == h.author 
-    ?`Phản hồi từ admin: ${y}` 
+  if (s == api.getCurrentUserID()) return
+  var msg = s == h.author
+    ?`Phản hồi từ admin: ${y}`
     :`Phản hồi từ tv: ${y}`
-   return api.sendMessage(msg, h.t, async(error, info) => {
+   return api.sendMessage(msg, h.id, async(error, info) => {
    global.client.handleReply.push({
-      name, messageID: info.messageID, author: h.author, t
+      name, messageID: info.messageID, author: h.author, id: t
     })
   }, h.messageID)
 }
