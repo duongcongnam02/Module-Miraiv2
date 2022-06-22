@@ -50,14 +50,12 @@ module.exports.run = async ({
   }
   break
   }
-  /* Tổng hợp top*/
   function FF(t1, t2) {
     for (var i in newArr) {
       msg += `${i < 4 ? ICON(i) : parseInt(i) + "."} ${newArr[i].n}\n » ${t1}: ${t2 == "m" ? CC(newArr[i][t2]) : LV(newArr[i][t2])}\n`
       if ((i == parseInt(g[1]) - 1 && i < newArr.length) || i == 9) break
     }
   }
-  /* lấy info xp, money.. */
   async function FOD(k, m) {
     for (const id of pI) {
       let mU = (await C.getData(id))[k] || 0
@@ -69,7 +67,6 @@ module.exports.run = async ({
       })
     }
   }
-  /* sắp xếp lại info vừa sort */
   function FO(k) {
     for (var i in array) {
       newArr.push({
@@ -80,19 +77,16 @@ module.exports.run = async ({
       })
     }
   }
-  /* lấy info người gọi lệnh */
   function FI(k, i, x) {
     let find = newArr.find(i => i.id == s)
     msg += TX(find[i], k, find[x])
   }
 }
-/* đổi tiền tệ */
 function CC(n) {
   return n.toLocaleString('en-US', {
     minimumFractionDigits: 2
   })
 }
-/* sort */
 function VC(k) {
   return function(a, b) {
     let i = 0;
@@ -104,15 +98,12 @@ function VC(k) {
     return i * -1
   }
 }
-/* đổi xp qua lv */
 function LV(x) {
   return Math.floor((Math.sqrt(1 + (4 * x) / 3) + 1) / 2)
 }
-/* lấy icon theo top */
 function ICON(i) {
   return i == 0 ? "🏆" : i == 1 ? "🥇" : i == 2 ? "🥈" : i == 3 ? "🥉" : ""
 }
-/* text info người gọi ở cuối list bxh */
 function TX(x, k, c) {
   return `\n👉 ${k} của bạn là ${k == "money" ? CC(c) + "$" : LV(c)} và đang đứng top ${x}\n » ${x == 1 ? `Bạn đang vô địch, thật vip pro` : `${x > 20 ? `Bạn đứng top ${x > 20 && x < 30 ? `khá thấp` : x > 30 && x < 50 ? `rất thấp` : `rất rất thấp`}!, cố gắng cày ${k} đi nhé` : x > 10 && x < 20 ? `Sắp lọt top 10 rồi cố gắng lên!!` : `Bạn có trong top 10, cố gắng giữ phong độ nhé!`}`}`
 }
