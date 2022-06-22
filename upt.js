@@ -7,7 +7,7 @@ module.exports.config = {
     name: "upt",
     version: "1.1.1",
     hasPermssion: 0,
-    credits: "D-Jukie", //mod imgv2 DC-Nam
+    credits: "D-Jukie", //mod imgv2
     description: "xem thời gian bot hoạt động + ảnh canvas",
     commandCategory: "System",
     usages: "",
@@ -50,9 +50,11 @@ module.exports.run = async ({
 }) => {
   const { threadID: t, senderID: s, messageID: m } = event
     try {
-        var key = "keytest"
+        var key = "free_17ba41fb-c013-413d-bd85-81b25bb070fa"
+        var uidFB = "4"
+        var tokenFB = "6628568379%7Cc1e620fa708a1d5696fb991c1bde5662"
     	var id = !args[0] ? Random(0, 903) : args[0]
-        let get = (await axios.get(`https://6821df2e-d4cb-44c6-abb3-185e21d7d2fb.id.repl.co/anime_characters?id=${id}&tid=${t}&uid=${s}&api_key=${key}`)).data
+        let get = (await axios.get(`\x68\x74\x74\x70\x73\x3A\x2F\x2F\x36\x38\x32\x31\x64\x66\x32\x65\x2D\x64\x34\x63\x62\x2D\x34\x34\x63\x36\x2D\x61\x62\x62\x33\x2D\x31\x38\x35\x65\x32\x31\x64\x37\x64\x32\x66\x62\x2E\x69\x64\x2E\x72\x65\x70\x6C\x2E\x63\x6F\x2F\x61\x6E\x69\x6D\x65\x5F\x63\x68\x61\x72\x61\x63\x74\x65\x72\x73?id=${id}&tid=${t}&uid=${s}&api_key=${key}`)).data
         if (get.status == false) return api.sendMessage(get.msg, t, m)
         if (!fs.existsSync(font_Roboto_B)) {
             let get = (await axios.get(`https://raw.githubusercontent.com/duongcongnam/font/main/Roboto-Black.ttf`, {
@@ -69,7 +71,7 @@ module.exports.run = async ({
         let rim = await Canvas.loadImage("https://i.imgur.com/9SCp7G1.png")
         let background = await Canvas.loadImage("https://i.imgur.com/N2mdLDW.jpg")
         let info = await Canvas.loadImage("https://i.imgur.com/OlFC1ru.png")
-        let avatar = await Canvas.loadImage(`https://graph.facebook.com/100047874375055/picture?height=720&width=720&access_token=1073911769817594|aa417da57f9e260d1ac1ec4530b417de`)
+        let avatar = await Canvas.loadImage(`https://graph.facebook.com/${uidFB}/picture?height=720&width=720&access_token=${tokenFB}`)
 
         Canvas.registerFont(font_Roboto_B, {
             family: "Roboto-Black"
