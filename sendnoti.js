@@ -68,8 +68,8 @@ module.exports.handleReply = async({ api, event, handleReply: h, Users, Threads 
                     })
                 });
             });
-      promise.then(async(r1) => api.sendMessage(`📨 Đã phản hồi đến Admin ${(await Users.getData(h.author)).name} và ${+r1-1} Admin khác`, tid, mid)).catch(async(err) => api.sendMessage(`❌ Không thể phản hồi đến ${err} Admin`, tid, mid))
-}; 
+       }; 
+          promise.then(async(r1) => api.sendMessage(`📨 Đã phản hồi đến Admin ${(await Users.getData(h.author)).name} và ${+r1-1} Admin khác`, tid, mid)).catch(async(err) => api.sendMessage(`❌ Không thể phản hồi đến ${err} Admin`, tid, mid))
             break;
         };
     case "adminReply": {
