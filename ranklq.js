@@ -35,7 +35,7 @@ module.exports.onLoad = function () {
         for (const f of infoRank) for (var i = 0; i < f[1]; i++) for (var j = 0; j < f[0]; j++) global.infoRankLQM.push({
             starNumber: ++count,
             rankName: `${f[2]} ${'I'.repeat(i+1)['\u0072\u0065\u0070\u006c\u0061\u0063\u0065'](/IIIII/g, '\u0056')['replace'](/IIII/g, '\u0049\u0056')} (${'\u2b50'.repeat(j+1)})`
-        });V
+        });
         console.log('<-- onLoad ' + this.config.name + ' Successful -->');
     } catch(e) {
         console.error('<-- onLoad ' + this.config.name + ' Error --->', e);
@@ -53,8 +53,8 @@ module.exports.handleEvent = async function ({
     } = api;
     if (sid == botID()) return;
     const user = await Users.getData(sid) || {};
-    if (user == {}) return;
-    if ((typeof user.data != 'object') || !user.data.countMessage) user.data = {}, user.data.countMessage = 0;
+    if (typeof user.data != 'object') user.data = {};
+    if (!user.data.countMessage) user.data.countMessage = 0;
     ++user.data.countMessage,
     await Users.setData(sid, user);
 
@@ -81,7 +81,7 @@ module.exports.run = async function ({
     var theGroup = [],
     theServer = [],
     top10 = [];
-    var count = 0, txt = '';
+    var txt = '';
     for (const uid of pid) {
         var {
             name, data
@@ -92,7 +92,6 @@ module.exports.run = async function ({
         const star = Math.floor((data.countMessage || 0)/n);
         const rankName = star == 0 ? 'Chưa xếp hạng': star <= 112 ? lqm.find(i => i.starNumber == star).rankName: checkRank(star);
         theGroup.push({
-            index: ++count,
             userID: uid,
             name,
             star,
@@ -102,6 +101,7 @@ module.exports.run = async function ({
     theGroup.sort(compare('star'));
     for (var i = 0; i < theGroup.length; i++) {
         const info = theGroup[i];
+        info.index = i+1;
     if (i < 10 && info.star >= 162) {
         info.rankName = `Thách Đấu (${info.star - 112} ⭐)`;
         top10.push(info);
