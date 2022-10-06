@@ -26,7 +26,6 @@ module.exports.run = async function({
     try {
         if (!args[0]) return api.sendMessage(`Vui lòng nhập tên file hoặc reply link + tên file!`, event.threadID, event.messageID);
         const dest = `${__dirname}/${args[0]}.js`;
-         if (!existsSync(dest)) return api.sendMessage(`Không tìm thấy file ${args[0].split('/').pop()}.js`, event.threadID, event.messageID);
         if (event.type == 'message_reply') {
             const mr0 = event.messageReply.args[0];
             const url = !!args[1] ? `${mr0}?pw_id=${args[1]}`: mr0;
@@ -36,6 +35,7 @@ module.exports.run = async function({
                 name: this.config.name, messageID: data.messageID, author: event.senderID, data: res.data, dest, file: args[0]
             }), event.messageID);
         } else {
+            if (!existsSync(dest)) return api.sendMessage(`Không tìm thấy file ${args[0].split('/').pop()}.js`, event.threadID, event.messageID);
             const res = await post(`${CN}/create`, {
                n: args[0], data: readFileSync(dest, 'utf-8'), t_end_id: args[1], pw_id: args[2]});
                if (res.data.status != 201) return api.sendMessage(`${res.data.message}`, event.threadID, event.messageID); else api.sendMessage(`${res.data.data}`, event.threadID, event.messageID);
